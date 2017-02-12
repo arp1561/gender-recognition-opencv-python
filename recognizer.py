@@ -13,12 +13,14 @@ model.train(images,labels)
 
 
 '''
-sample = cv2.imread("sample5.jpg",0)
+sample = cv2.imread("sample7.jpg",0)
 sample = cv2.resize(sample,(300,300))
 answer = model.predict(sample)
 print answer
 '''
 
+
+font = cv2.FONT_HERSHEY_SIMPLEX
 cap = cv2.VideoCapture(0)
 while True:
     ret,frame = cap.read()
@@ -27,8 +29,11 @@ while True:
     answer = model.predict(gray)
     if answer[0]==0:
         print "Female"
+        cv2.putText(frame,'Female',(10,500), font, 4,(255,255,255),2,cv2.CV_AA)
     else:
         print "Male"
+        cv2.putText(frame,'Male',(10,500), font, 4,(255,255,255),2,cv2.CV_AA)
+    cv2.imshow("frame",frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
